@@ -16,8 +16,7 @@ export default function Vacunas() {
     } else if (filtro === "no-obligatorias") {
       params.append("obligatoria", "false");
     }
-    // acá podrías seguir agregando:
-    // if (filtro === "bebes") params.append("grupo", "Bebés");
+
 
     const qs = params.toString();
     if (qs) url += "?" + qs;
@@ -44,7 +43,6 @@ export default function Vacunas() {
       <div className="card-auth" style={{ maxWidth: "900px" }}>
         <h1 className="card-auth__title">Vacunas del calendario</h1>
 
-        {/* Filtros */}
         <div className="vacunas-filtros">
           <button
             className={`btn-filtro ${filtroActivo === "todas" ? "activo" : ""}`}
@@ -70,7 +68,6 @@ export default function Vacunas() {
           </button>
         </div>
 
-        {/* Lista */}
         <ul className="lista-vacunas">
           {vacunas.map((v) => (
             <li key={v._id} className="vacuna-item">

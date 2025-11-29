@@ -9,15 +9,12 @@ export default function Nav() {
     <nav className="navbar">
       <div className="navbar-container">
 
-        {/* LOGO / BRAND */}
         <div className="navbar-logo">
           <Link to="/">Mistomed</Link>
         </div>
 
-        {/* LINKS */}
         <div className="navbar-links">
 
-          {/* 👉 HOME aparece siempre */}
           <Link to="/">Home</Link>
 
           {!userApp ? (
@@ -37,7 +34,7 @@ export default function Nav() {
 
               <Link to="/vacunas">Vacunas</Link>
               <Link to="/mis-vacunas">Mis Vacunas</Link>
-
+              <Link to="/grupos">Grupos</Link>
               <span
                 onClick={logout}
                 className="navbar-link-fake"

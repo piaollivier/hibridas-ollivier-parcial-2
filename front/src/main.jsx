@@ -17,6 +17,9 @@ import MisVacunasCrear from "./pages/MisVacunasCrear.jsx"
 import MisVacunasEditar from "./pages/MisVacunasEditar.jsx"
 import Register from "./pages/Register.jsx"
 import MiPerfil from "./pages/MiPerfil.jsx"
+import Grupos from "./pages/Grupos.jsx"
+import GruposCrear from "./pages/GruposCrear.jsx"
+import GruposEditar from "./pages/GruposEditar.jsx"
 
 const router = createBrowserRouter([
   {
@@ -59,6 +62,18 @@ const router = createBrowserRouter([
         path: "/mi-perfil", 
         element: <MiPerfil /> 
       },
+      {
+        path: "/grupos",
+        element: <ProtectedRoute component={<Grupos />} />,
+      },
+      {
+        path: "/grupos/nuevo",
+        element: <ProtectedRoute component={<GruposCrear />} />,
+      },
+      {
+        path: "/grupos/editar/:id",
+        element: <ProtectedRoute component={<GruposEditar />} />,
+      }
     ],
   },
 ])

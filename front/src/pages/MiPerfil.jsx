@@ -1,4 +1,3 @@
-// src/views/MiPerfil.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../context/SessionContext";
@@ -52,7 +51,6 @@ export default function MiPerfil() {
             <p><strong>ID de usuario:</strong> {userApp._id}</p>
           )}
 
-          {/* Si tenés algún otro campo que quieras mostrar, lo podés sumar acá */}
         </div>
       </div>
     </main>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const Register = () => {
+export default function Register() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -14,14 +14,21 @@ const Register = () => {
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!form.email || !form.password) {
+      setError("El email y la contraseña son obligatorios");
+      return;
+    }
+
+    if (!form.confirmPassword) {
+      setError("La confirmación de la contraseña es obligatoria");
+      return;
+    }
 
     if (form.password !== form.confirmPassword) {
       setError("Las contraseñas no coinciden");
@@ -29,9 +36,11 @@ const Register = () => {
     }
 
     const body = {
-      username: form.username,
       email: form.email,
       password: form.password,
+        confirmPassword: form.confirmPassword,
+      username: form.username, 
+
     };
 
     setError("");
@@ -41,12 +50,28 @@ const Register = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al registrar usuario");
-        return res.json();
+      .then(async (res) => {
+        let data = null;
+        try {
+          data = await res.json();
+        } catch {
+        }
+
+        if (!res.ok) {
+          throw new Error(
+            data?.error || "No se pudo registrar el usuario"
+          );
+        }
+
+        return data;
       })
-      .then(() => navigate("/login"))
-      .catch((err) => setError(err.message || "Error al registrar usuario"));
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.error("ERROR REGISTER FRONT >>>", err);
+        setError(err.message || "No se pudo registrar el usuario");
+      });
   };
 
   return (
@@ -59,11 +84,11 @@ const Register = () => {
             style={{
               backgroundColor: "#fde2e2",
               color: "#b3261e",
-              padding: "8px 12px",
+              padding: "8px",
               borderRadius: "8px",
-              fontSize: "0.9rem",
               marginBottom: "16px",
               textAlign: "center",
+              fontSize: "0.9rem",
             }}
           >
             {error}
@@ -72,13 +97,12 @@ const Register = () => {
 
         <form onSubmit={handleSubmit} className="form-vacuna">
           <label>
-            Nombre de usuario
+            Nombre de usuario (opcional)
             <input
               type="text"
               name="username"
               value={form.username}
               onChange={handleChange}
-              required
               placeholder="Ingresar nombre de usuario"
             />
           </label>
@@ -91,7 +115,7 @@ const Register = () => {
               value={form.email}
               onChange={handleChange}
               required
-              placeholder="Ingresar correo electrónico"
+              placeholder="Ingresar correo"
             />
           </label>
 
@@ -133,7 +157,11 @@ const Register = () => {
             ¿Ya tenés cuenta?{" "}
             <Link
               to="/login"
-              style={{ color: "#06385f", fontWeight: "600", textDecoration: "none" }}
+              style={{
+                color: "#06385f",
+                fontWeight: "600",
+                textDecoration: "none",
+              }}
             >
               Iniciar sesión
             </Link>
@@ -142,6 +170,4 @@ const Register = () => {
       </div>
     </main>
   );
-};
-
-export default Register;
+}

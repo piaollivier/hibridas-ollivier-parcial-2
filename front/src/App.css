@@ -601,7 +601,8 @@ main{
 }
 
 /* Botón igual que el Login */
-.boton,  .btn-primary-auth {
+.boton,  
+.btn-primary-auth {
   margin-top: 8px;
   width: 100%;
   padding: 12px 16px;
@@ -626,6 +627,16 @@ main{
 .boton {
   text-align: center;
   text-decoration: none;
+}
+
+.btns  {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.btn-editar {
+  background-color: #0f3758 !important;
 }
 
 /* REGISTER */

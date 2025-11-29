@@ -14,15 +14,14 @@ export default function Home() {
         className="card-auth"
         style={{
           maxWidth: "1000px",
-          padding: "50px", // MÁS ESPACIO INTERNO
+          padding: "50px", 
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: "40px", // MÁS ESPACIO ENTRE TEXTO E IMAGEN
+          gap: "40px", 
           alignItems: "center",
-          minHeight: "420px", // LEVANTA VISUALMENTE LA CARD
+          minHeight: "420px", 
         }}
       >
-        {/* COLUMNA IZQUIERDA — TEXTO */}
         <div>
           <h1
             className="card-auth__title"
@@ -48,7 +47,6 @@ export default function Home() {
             puedas tener tu salud <strong>siempre organizada</strong> y accesible.
           </p>
 
-          {/* BOTÓN */}
           <div style={{ marginTop: "30px" }}>
             <Link to="/vacunas" className="btn-primary-auth">
               Ver todas las vacunas
@@ -56,7 +54,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* COLUMNA DERECHA — IMAGEN */}
         <img
           src={VacunasHomeImg}
           alt="Calendario de vacunación"
